@@ -8,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/gallery.css">
 </head>
 <body>
 	<div class="center-content">
-		<h1 class="logo">JBlog</h1>
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<form class="search-form">
 			<fieldset>
@@ -24,6 +24,18 @@
 				<input type="radio" name="which" value="blog-user"> <label>블로거</label>
 			</fieldset>
 		</form>
+		<div id="gallery">
+			<ul>
+				<c:forEach items="${blogVo }" var="vo" >
+					<li>
+						<a	href="${pageContext.request.contextPath }/jblog/${vo.id}"
+						data-lightbox="gallery"
+						class="image"
+						style="background-image:url('${pageContext.request.contextPath}${vo.profile }')"></a>
+					</li>
+				</c:forEach>																																			
+			</ul>	
+		</div>
 	</div>
 </body>
 </html>

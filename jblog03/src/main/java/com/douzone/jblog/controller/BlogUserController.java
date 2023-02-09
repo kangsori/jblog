@@ -1,10 +1,7 @@
 package com.douzone.jblog.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +13,7 @@ import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.PostVo;
 
-@Auth()
+@Auth
 @Controller
 @RequestMapping("/jblog/{id}")
 public class BlogUserController {

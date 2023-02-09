@@ -15,6 +15,10 @@ public class BlogRepository {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	public List<BlogVo> selectBlogList() {
+		return sqlSession.selectList("selectBlogList");
+	}
 
 	public void insertBlog(BlogVo vo) {
 	System.out.println(vo);
@@ -27,7 +31,6 @@ public class BlogRepository {
 
 	public void updateBlog(BlogVo vo) {
 		sqlSession.update("blog.updateBlog",vo);
-		
 	}
 	
 	public List<CategoryVo> getCategory(String id) {
@@ -57,7 +60,5 @@ public class BlogRepository {
 	public PostVo getPostView(Integer no) {
 		return sqlSession.selectOne("blog.selectPostView",no);
 	}
-
-	
 
 }

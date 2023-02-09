@@ -15,6 +15,10 @@ public class BlogService {
 	
 	@Autowired
 	public BlogRepository blogRepository;
+	
+	public List<BlogVo> getblogList() {
+		return blogRepository.selectBlogList();
+	}
 
 	public BlogVo getBlog(String id) {
 		return blogRepository.getBlog(id);
@@ -22,7 +26,6 @@ public class BlogService {
 
 	public void updateBlog(BlogVo vo) {
 		blogRepository.updateBlog(vo);
-		
 	}
 	
 	public List<CategoryVo> getCategory(String id) {
@@ -31,12 +34,10 @@ public class BlogService {
 
 	public void addCategory(CategoryVo vo) {
 		blogRepository.insertCategory(vo);
-		
 	}
 
 	public void deleteCategory(int no) {
 		blogRepository.deleteCategory(no);
-		
 	}
 	
 	public boolean checkCategory(String id) {
@@ -54,6 +55,5 @@ public class BlogService {
 	public PostVo getPostView(Integer no) {
 		return blogRepository.getPostView(no);
 	}
-
 	
 }

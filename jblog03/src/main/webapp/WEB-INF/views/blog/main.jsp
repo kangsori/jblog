@@ -30,8 +30,8 @@
 		</div>
 
 		<div id="extra">
-			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}${blogVo.profile }">
+			<div class="blog-logo" >
+				<img style="height: 200px;" src="${pageContext.request.contextPath}${blogVo.profile }">
 			</div>
 		</div>
 
