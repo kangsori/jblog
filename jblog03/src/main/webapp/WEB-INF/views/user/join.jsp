@@ -12,19 +12,20 @@
 <body>
 	<div class="center-content">
 		<h1 class="logo">JBlog</h1>
-		<ul class="menu">
-			<li><a href="">로그인</a></li>
-			<li><a href="">회원가입</a></li>
-			<li><a href="">로그아웃</a></li>
-			<li><a href="">내블로그</a></li>
-		</ul>
-		<form class="join-form" id="join-form" method="post" action="">
+		<c:import url="/WEB-INF/views/includes/header.jsp" />
+		<form class="join-form" id="join-form" method="post" action="${pageContext.request.contextPath }/user/join">
 			<label class="block-label" for="name">이름</label>
-			<input id="name"name="name" type="text" value="">
+			<input id="name"name="name" type="text" value="${userVo.name }">
 			
 			<label class="block-label" for="blog-id">아이디</label>
-			<input id="blog-id" name="id" type="text"> 
+			<input id="blog-id" name="id" type="text" value="${userVo.id }">
+			
 			<input id="btn-checkemail" type="button" value="id 중복체크">
+			<c:if test="${idmessage != ''}">
+				<P style="color: #f00; text-align: left; padding: 0;">
+					${idmessage }
+				</P>
+			</c:if> 
 			<img id="img-checkemail" style="display: none;" src="${pageContext.request.contextPath}/assets/images/check.png">
 
 			<label class="block-label" for="password">패스워드</label>

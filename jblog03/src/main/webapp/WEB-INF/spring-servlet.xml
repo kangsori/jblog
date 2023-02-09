@@ -27,6 +27,13 @@
 	<mvc:default-servlet-handler/>
 	
 	
+	<!-- Interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/jblog/**" />	
+			<bean class="com.douzone.jblog.security.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
 	
 
 	<!-- ViewResolver -->
