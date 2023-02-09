@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.repository.UserRepository;
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.UserVo;
 
 @Service
@@ -33,6 +34,11 @@ public class UserService {
 		blogRepository.insertBlog(blogVo);
 		
 		// 기본 카테고리 등록 
+		CategoryVo categoryVo = new CategoryVo();
+		categoryVo.setName("기본 카테고리");
+		categoryVo.setDescription("기본 카테고리 입니다.");
+		categoryVo.setId(vo.getId());
+		blogRepository.insertCategory(categoryVo);
 		
 	}
 
