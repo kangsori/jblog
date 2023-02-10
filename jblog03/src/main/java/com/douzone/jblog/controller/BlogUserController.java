@@ -28,11 +28,12 @@ public class BlogUserController {
 					   Model model) {
 		List<PostVo> postList = null;
 		PostVo postVo = null;
+		System.out.println("here");
 		
 		//	카테고리 가져오기 
 		List<CategoryVo> categoryList =blogService.getCategory(id);
 		model.addAttribute("categoryList",categoryList);
-		
+
 		// 선택한 카테고리의 글목록 가져오기 
 		if(categoryNo.isPresent()) {
 			postList =blogService.getPost(categoryNo.get());
@@ -40,7 +41,7 @@ public class BlogUserController {
 			// 첫번째 카테고리의 글목록 가져오기 
 			postList = blogService.getPost(categoryList.get(0).getNo());
 		}
-		
+
 		// 최근글 가져오기 
 		if(postList.size() > 0) {
 			postVo = blogService.getPostView(postList.get(0).getNo());
