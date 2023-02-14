@@ -2,10 +2,13 @@ package com.douzone.jblog.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,16 +23,19 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join() {
+	public String join(@ModelAttribute UserVo vo) {
 		return "/user/join";
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(UserVo vo,Model model) {
-	
+	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result,Model model) {
+		if(result.hasErrors()) {
+			model.addAllAttributes(result.getModel());
+			return "user/join";
+		}
+
 		//아이디 체크(중복일경우 로그인페이지 재로드 + 메세지 출력)
 		if(userService.checkId(vo.getId())) {
-		    model.addAttribute("userVo",vo);
 		    model.addAttribute("idmessage","중복 아이디 입니다. ");
 			return "/user/join";
 		}
@@ -37,7 +43,12 @@ public class UserController {
 		//유효성 통과후 가입 
 		userService.join(vo);
 		
-		return "/user/joinsuccess";
+		return "redirect:/user/joinsuccess";
+	}
+	
+	@RequestMapping("/joinsuccess")
+	public String joinSuccess() {
+		return "user/joinsuccess";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
