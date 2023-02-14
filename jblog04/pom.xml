@@ -5,8 +5,7 @@
     <artifactId>jblog</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>jblog03</groupId>
-  <artifactId>jblog03</artifactId>
+  <artifactId>jblog04</artifactId>
   <packaging>war</packaging>
   
   <properties>
@@ -25,6 +24,13 @@
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-webmvc</artifactId>
 		    <version>${org.springframework-version}</version>
+			<!-- JCL 제외 -->
+			<exclusions>
+			   <exclusion>
+				  <groupId>org.springframework</groupId>
+				  <artifactId>spring-jcl</artifactId>
+			   </exclusion>
+			</exclusions>		    
 		</dependency>
 		
 		<!-- File Upload -->
@@ -45,28 +51,7 @@
 		    <artifactId>spring-aspects</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
-		
-		<!-- JSTL -->
-		<dependency>
-		    <groupId>jstl</groupId>
-		    <artifactId>jstl</artifactId>
-		    <version>1.2</version>
-		</dependency>
-						
-		<!-- Servlet -->
-		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>4.0.1</version>
-		    <scope>provided</scope>
-		</dependency>
-		<dependency>
-		    <groupId>javax.servlet.jsp</groupId>
-		    <artifactId>jsp-api</artifactId>
-		    <version>2.2</version>
-		    <scope>provided</scope>
-		</dependency>	
-		
+
 		<!-- Spring JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -100,12 +85,59 @@
 		    <version>3.0.8</version>
 		</dependency>
 		
+		<!-- jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.4.1</version>
+		</dependency>
+		
+		<!-- validation -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.3.Final</version>
+		</dependency>
+
+		<!-- Logback --> 
+		<dependency>                                    
+			<groupId>org.slf4j</groupId>                
+			<artifactId>jcl-over-slf4j</artifactId>     
+			<version>${jcloverslf4j.version}</version>  
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		
+		<!-- JSTL -->
+		<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+						
+		<!-- Servlet -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet.jsp</groupId>
+		    <artifactId>jsp-api</artifactId>
+		    <version>2.2</version>
+		    <scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 	
 	
 	
 	<build>
-		<finalName>jblog03</finalName>
+		<finalName>jblog04</finalName>
 		<plugins>
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
