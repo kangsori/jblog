@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="blog">
+	
+	<select id="selectBlogList" resultType="blogvo">
+		<![CDATA[
+			select id, title, profile
+			from blog
+		]]>
+	</select>
+
+	<insert id="insertBlog" parameterType="blogvo">
+		<![CDATA[
+			insert into blog (id, title, profile) 
+			select id, ifnull(#{title }, CONCAT(name,'의 Blog')), ifnull(#{profile },'/assets/images/blog-basic.jpg')
+			from user 
+			where id = #{id }
+		]]>
+	</insert>
+	
+	<select id="selectBlog" parameterType="string" resultType="blogvo">
+		<![CDATA[
+			select id, title, profile
+			from blog
+			where id =#{id }
+		]]>
+	</select>
+	
+	<update id="updateBlog" parameterType="blogvo">
+		<![CDATA[
+			update blog 
+			set title = #{title },
+				profile = #{profile }
+			where id = #{id }
+		]]>
+	</update>
+	
+	<select id="selectCategory" parameterType="string" resultType="categoryvo">
+		<![CDATA[
+			select no, name, description, id
+			      , (select count(*) from post where category_no = id) as postCount
+			from category
+			where id = #{id }
+			order by no
+		]]>
+	</select>
+	
+	<insert id="insertCategory" parameterType="categoryvo">
+		<![CDATA[
+			insert into category (name, description, id)
+			values (#{name }, #{description }, #{id } )
+		]]>
+	</insert>
+	
+	<delete id="deleteCategory" parameterType="int">
+		<![CDATA[
+			delete from category where no = #{no }
+		]]>
+	</delete>
+	
+	<select id="selectExistsCategory" parameterType="string" resultType="boolean">
+		<![CDATA[
+			 select if(count(*)>1,true,false)
+			 from category
+			 where id = #{id }
+				   	
+		]]>
+	</select>
+	
+	<insert id="insertPost" parameterType="postvo">
+		<![CDATA[
+			insert into post (title, contents, reg_date, category_no)
+			values (#{title }, #{contents }, sysdate(), #{categoryNo } )
+		]]>
+	</insert>
+	
+	<select id="selectPost" parameterType="integer" resultType="postvo">
+		<![CDATA[
+			select no, title, contents, reg_date as regDate, category_no as categoryNo
+			from post
+			where category_no = #{no }
+			order by no desc
+		]]>
+	</select>
+	
+	<select id="selectPostView" parameterType="integer" resultType="postvo">
+		<![CDATA[
+			select no, title, contents, reg_date as regDate, category_no as categoryNo
+			from post
+			where no = #{no }
+		]]>
+	</select>
+	
+</mapper>
